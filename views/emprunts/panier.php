@@ -42,7 +42,7 @@ unset($_SESSION['success'], $_SESSION['error']);
         <div class="logo"><h1>📚 Bibliothèque</h1></div>
         <nav class="library-nav">
             <a href="../livres/catalogue.php">Accueil</a>
-            <a href="panier.php" class="active">📖 Mes emprunts</a>
+            <a href="panier.php" class="active">Mes emprunts</a>
             <?php if (($_SESSION['user_role'] ?? '') === 'admin'): ?>
                 <a href="../livres/add_livre.php">➕ Ajouter un livre</a>
             <?php endif; ?>
@@ -53,7 +53,7 @@ unset($_SESSION['success'], $_SESSION['error']);
 
     <main>
         <div class="panier-section">
-            <h2>📖 Mes emprunts en cours</h2>
+            <h2> Mes emprunts en cours</h2>
 
             <?php if (!empty($success)): ?>
                 <div class="alert success"><?= htmlspecialchars($success) ?></div>
@@ -76,26 +76,26 @@ unset($_SESSION['success'], $_SESSION['error']);
                         <div class="emprunt-card <?= $emprunt->isEnRetard() ? 'overdue' : '' ?>">
                             <div class="emprunt-info">
                                 <h3><?= htmlspecialchars($emprunt->getLivreTitre() ?? '—') ?></h3>
-                                <p>✍️ <?= htmlspecialchars($emprunt->getLivreAuteur() ?? '—') ?></p>
-                                <p>📅 Emprunté le :
+                                <p><?= htmlspecialchars($emprunt->getLivreAuteur() ?? '—') ?></p>
+                                <p>Emprunté le :
                                     <?= date('d/m/Y', strtotime($emprunt->getDateEmprunt())) ?>
                                 </p>
-                                <p>📅 À retourner avant le :
+                                <p>À retourner avant le :
                                     <?= date('d/m/Y', strtotime($emprunt->getDateRetourPrevue())) ?>
                                 </p>
                                 <?php if ($emprunt->isEnRetard()): ?>
                                     <p class="overdue-label">
-                                        ⚠️ EN RETARD de <?= abs($emprunt->getJoursRestants()) ?> jour(s) !
+                                        EN RETARD de <?= abs($emprunt->getJoursRestants()) ?> jour(s) !
                                     </p>
                                 <?php else: ?>
-                                    <p>⏰ Jours restants : <?= $emprunt->getJoursRestants() ?> jour(s)</p>
+                                    <p>Jours restants : <?= $emprunt->getJoursRestants() ?> jour(s)</p>
                                 <?php endif; ?>
                             </div>
                             <div class="emprunt-actions">
                                 <a href="../../controllers/empruntController.php?action=retourner&id=<?= $emprunt->getId() ?>"
                                    class="btn btn-success"
                                    onclick="return confirm('Confirmer le retour de ce livre ?')">
-                                    ✅ Retourner
+                                    Retourner
                                 </a>
                             </div>
                         </div>
@@ -105,7 +105,7 @@ unset($_SESSION['success'], $_SESSION['error']);
 
             <!-- ── HISTORIQUE ──────────────────────────────────── -->
             <?php if (!empty($empruntsPasses)): ?>
-                <h3 style="margin-top:40px;">📜 Historique des emprunts</h3>
+                <h3 style="margin-top:40px;">Historique des emprunts</h3>
                 <table>
                     <thead>
                         <tr>

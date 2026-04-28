@@ -18,7 +18,7 @@ require_once __DIR__ . '/../../controllers/authController.php';
         <div class="auth-card">
 
             <div class="auth-header">
-                <h1>📚 Bibliothèque</h1>
+                <h1>Bibliothèque</h1>
                 <h2>Inscription</h2>
             </div>
 
@@ -34,24 +34,24 @@ require_once __DIR__ . '/../../controllers/authController.php';
                 <input type="hidden" name="action" value="register">
 
                 <div class="form-group">
-                    <label for="nom">👤 Nom complet</label>
+                    <label for="nom">Nom complet</label>
                     <input type="text" name="nom" id="nom"
                            value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">📧 Email</label>
+                    <label for="email">Email</label>
                     <input type="email" name="email" id="email"
                            value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">🔒 Mot de passe <small>(min. 6 caractères)</small></label>
+                    <label for="password">Mot de passe <small>(min. 6 caractères)</small></label>
                     <input type="password" name="password" id="password" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="confirm_password">🔒 Confirmer le mot de passe</label>
+                    <label for="confirm_password">Confirmer le mot de passe</label>
                     <input type="password" name="confirm_password" id="confirm_password" required>
                 </div>
 

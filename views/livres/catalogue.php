@@ -17,12 +17,12 @@ require_once __DIR__ . '/../../controllers/livreController.php';
 
     <!-- ── HEADER ─────────────────────────────────────────────────── -->
     <header class="library-header">
-        <div class="logo"><h1>📚 Bibliothèque</h1></div>
+        <div class="logo"><h1>Bibliothèque</h1></div>
         <nav class="library-nav">
             <a href="catalogue.php" class="active">Accueil</a>
 
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="../emprunts/panier.php">📖 Mes emprunts</a>
+                <a href="../emprunts/panier.php">Mes emprunts</a>
                 <?php if ($_SESSION['user_role'] === 'admin'): ?>
                     <a href="add_livre.php">➕ Ajouter un livre</a>
                 <?php endif; ?>
@@ -38,7 +38,7 @@ require_once __DIR__ . '/../../controllers/livreController.php';
     <main>
         <!-- ── RECHERCHE ──────────────────────────────────────────── -->
         <div class="search-section">
-            <h2>🔍 Rechercher un livre</h2>
+            <h2>Rechercher un livre</h2>
             <form method="GET" action="catalogue.php" class="search-form">
                 <input type="hidden" name="action" value="search">
 
@@ -71,7 +71,7 @@ require_once __DIR__ . '/../../controllers/livreController.php';
 
         <!-- ── CATALOGUE ──────────────────────────────────────────── -->
         <div class="catalogue">
-            <h2>📖 Notre catalogue
+            <h2>Notre catalogue
                 <small style="font-size:.7em;font-weight:normal;color:#8d6e63;">
                     (<?= count($livres) ?> livre<?= count($livres) !== 1 ? 's' : '' ?>)
                 </small>
@@ -107,25 +107,25 @@ require_once __DIR__ . '/../../controllers/livreController.php';
                                     <?= htmlspecialchars($livre->getCategorie() ?? 'Non catégorisé') ?>
                                 </span>
                                 <h3 class="card-title"><?= htmlspecialchars($livre->getTitre()) ?></h3>
-                                <p class="card-author">✍️ <?= htmlspecialchars($livre->getAuteur()) ?></p>
-                                <p class="card-year">📅 <?= $livre->getAnneePublication() ?? 'Année inconnue' ?></p>
-                                <p class="card-price">💰 <?= $livre->getPrixFormate() ?></p>
+                                <p class="card-author"><?= htmlspecialchars($livre->getAuteur()) ?></p>
+                                <p class="card-year"><?= $livre->getAnneePublication() ?? 'Année inconnue' ?></p>
+                                <p class="card-price"><?= $livre->getPrixFormate() ?></p>
 
                                 <?php if ($livre->isDisponible()): ?>
                                     <p class="stock-disponible">
-                                        ✓ Disponible (<?= $livre->getStock() ?> ex.)
+                                        ✓ Disponible (<?= $livre->getStock() ?>)
                                     </p>
                                     <?php if (isset($_SESSION['user_id'])): ?>
                                         <form action="../../controllers/empruntController.php" method="POST">
                                             <input type="hidden" name="livre_id" value="<?= $livre->getId() ?>">
                                             <button type="submit" name="action" value="emprunter"
                                                     class="btn btn-success">
-                                                📖 Emprunter
+                                                Emprunter
                                             </button>
                                         </form>
                                     <?php else: ?>
                                         <a href="../auth/login.php" class="btn btn-primary">
-                                            🔒 Connectez-vous pour emprunter
+                                            Connectez-vous pour emprunter
                                         </a>
                                     <?php endif; ?>
                                 <?php else: ?>
@@ -138,7 +138,7 @@ require_once __DIR__ . '/../../controllers/livreController.php';
                                     <a href="edit_livre.php?code=<?= urlencode($livre->getCode()) ?>"
                                        class="btn btn-warning"
                                        style="margin-top:6px;">
-                                        ✏️ Modifier
+                                        Modifier
                                     </a>
                                     <a href="../../controllers/deleteLivreController.php?code=<?= urlencode($livre->getCode()) ?>"
                                        class="btn btn-danger"
