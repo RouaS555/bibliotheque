@@ -1,7 +1,5 @@
 <?php
-/**
- * Classe Livre - Entité représentant un livre
- */
+
 class Livre
 {
     public const DEVISE = "TND";
@@ -43,7 +41,7 @@ class Livre
         $this->image       = $image;
     }
 
-    /* ── Getters ─────────────────────────────────────────────────── */
+ 
     public function getId(): int              { return $this->id; }
     public function getCode(): string         { return $this->code; }
     public function getTitre(): string        { return $this->titre; }
@@ -57,7 +55,7 @@ class Livre
     public function getImage(): string        { return $this->image; }
     public function getDateAjout(): string    { return $this->date_ajout; }
 
-    /* ── Méthodes utilitaires ────────────────────────────────────── */
+
     public function isDisponible(): bool
     {
         return $this->stock > 0;
@@ -68,11 +66,7 @@ class Livre
         return number_format($this->prix, 2, '.', ' ') . ' ' . self::DEVISE;
     }
 
-    /**
-     * URL relative utilisable depuis n'importe quelle vue via la racine web.
-     * Fonctionne avec : ../../public/uploads/livres/<image>
-     * depuis views/livres/ ou views/emprunts/.
-     */
+    
     public function getImageUrl(): string
     {
         return '../../public/uploads/livres/' . $this->image;

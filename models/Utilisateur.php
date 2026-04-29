@@ -1,7 +1,5 @@
 <?php
-/**
- * Classe Utilisateur – Entité représentant un membre de la bibliothèque
- */
+
 class Utilisateur
 {
     private int    $id               = 0;
@@ -23,7 +21,6 @@ class Utilisateur
         $this->role         = $role;
     }
 
-    /* ── Getters ─────────────────────────────────────────────────── */
     public function getId(): int              { return $this->id; }
     public function getNom(): string          { return $this->nom; }
     public function getEmail(): string        { return $this->email; }
@@ -31,11 +28,10 @@ class Utilisateur
     public function getRole(): string         { return $this->role; }
     public function getDateInscription(): string { return $this->date_inscription; }
 
-    /* ── Helpers ─────────────────────────────────────────────────── */
+
     public function isAdmin(): bool  { return $this->role === 'admin'; }
     public function isMembre(): bool { return $this->role === 'membre'; }
 
-    /* ── Setters ─────────────────────────────────────────────────── */
     public function setNom(string $nom): void              { $this->nom          = $nom; }
     public function setEmail(string $email): void          { $this->email        = $email; }
     public function setMotDePasse(string $mdp): void       { $this->mot_de_passe = $mdp; }

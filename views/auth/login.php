@@ -1,7 +1,5 @@
 <?php
-/**
- * views/auth/login.php
- */
+
 require_once __DIR__ . '/../../controllers/authController.php';
 ?>
 <!DOCTYPE html>
@@ -30,7 +28,6 @@ require_once __DIR__ . '/../../controllers/authController.php';
                 <div class="alert success"><?= htmlspecialchars($success) ?></div>
             <?php endif; ?>
 
-            <!-- Le formulaire poste vers lui-même ; le contrôleur déjà inclus traite l'action -->
             <form method="POST" action="login.php" class="auth-form">
                 <input type="hidden" name="action" value="login">
 

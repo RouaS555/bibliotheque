@@ -1,15 +1,10 @@
 <?php
-/**
- * empruntController.php – Emprunter / Retourner un livre
- * Appelé directement (POST/GET), redirige toujours vers une vue
- */
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once __DIR__ . '/../config/config.php';
 
-// Vérification de connexion
 if (!isset($_SESSION['user_id'])) {
     header("Location: " . BASE_URL . "views/auth/login.php");
     exit;
@@ -24,9 +19,7 @@ $action        = $_POST['action'] ?? $_GET['action'] ?? '';
 $empruntManager = new EmpruntManager($db);
 $livreManager   = new LivreManager($db);
 
-/* ══════════════════════════════════════════════════════════════════
- *  EMPRUNTER
- * ══════════════════════════════════════════════════════════════════ */
+
 if ($action === 'emprunter' && isset($_POST['livre_id'])) {
 
     $livreId = intval($_POST['livre_id']);
@@ -54,19 +47,16 @@ if ($action === 'emprunter' && isset($_POST['livre_id'])) {
     exit;
 }
 
-/* ══════════════════════════════════════════════════════════════════
- *  RETOURNER
- * ══════════════════════════════════════════════════════════════════ */
+
 if ($action === 'retourner' && isset($_GET['id'])) {
 
     $empruntId = intval($_GET['id']);
 
-    // Récupérer le livre_id avant de marquer comme rendu
     $stmt = $db->prepare("SELECT livre_id, utilisateur_id FROM emprunts WHERE id = :id");
     $stmt->execute([':id' => $empruntId]);
     $row = $stmt->fetch();
 
-    // Sécurité : l'emprunt doit appartenir à l'utilisateur connecté (ou admin)
+
     if (!$row) {
         $_SESSION['error'] = "Emprunt introuvable.";
     } elseif (
@@ -87,7 +77,6 @@ if ($action === 'retourner' && isset($_GET['id'])) {
     exit;
 }
 
-/* ── Aucune action valide ─────────────────────────────────────── */
 header("Location: " . BASE_URL . "views/livres/catalogue.php");
 exit;
 ?>

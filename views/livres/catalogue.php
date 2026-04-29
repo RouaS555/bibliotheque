@@ -69,7 +69,6 @@ require_once __DIR__ . '/../../controllers/livreController.php';
             </form>
         </div>
 
-        <!-- ── CATALOGUE ──────────────────────────────────────────── -->
         <div class="catalogue">
             <h2>Notre catalogue
                 <small style="font-size:.7em;font-weight:normal;color:#8d6e63;">
@@ -133,7 +132,6 @@ require_once __DIR__ . '/../../controllers/livreController.php';
                                     <button class="btn btn-disabled" disabled>Indisponible</button>
                                 <?php endif; ?>
 
-                                <!-- Boutons admin : Modifier + Supprimer -->
                                 <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
                                     <a href="edit_livre.php?code=<?= urlencode($livre->getCode()) ?>"
                                        class="btn btn-warning"

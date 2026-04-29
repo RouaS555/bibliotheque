@@ -1,9 +1,5 @@
 <?php
-/**
- * addLivreController.php – Ajout d'un livre (admin uniquement)
- * Inclus depuis views/livres/add_livre.php
- * Implémente getProduct() + insert() du PDF Activité 5
- */
+
 require_once __DIR__ . '/../config/config.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -17,7 +13,7 @@ require_once __DIR__ . '/../models/FileUploader.php';
 $message = '';
 $error   = '';
 
-// ── Garde admin ───────────────────────────────────────────────────
+
 if (!isset($_SESSION['user_id']) || ($_SESSION['user_role'] ?? '') !== 'admin') {
      header("Location: " . BASE_URL . "views/livres/catalogue.php");
     exit;
@@ -25,7 +21,7 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['user_role'] ?? '') !== 'admin') 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    /* ── Récupération & nettoyage des champs ─────────────────────── */
+   
     $code        = trim($_POST['code']        ?? '');
     $titre       = trim($_POST['titre']       ?? '');
     $auteur      = trim($_POST['auteur']      ?? '');
@@ -63,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $manager  = new LivreManager($db);
 
-        // Vérifier l'existence du code (PDF Activité 5 – getProduct avant insert)
+  
         if ($manager->getLivreByCode($code)) {
             $error = "Un livre avec le code « $code » existe déjà.";
         } else {

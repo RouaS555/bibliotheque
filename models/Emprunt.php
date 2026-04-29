@@ -1,7 +1,5 @@
 <?php
-/**
- * Classe Emprunt – Entité représentant un emprunt de livre
- */
+
 class Emprunt
 {
     private int     $id                  = 0;
@@ -12,7 +10,6 @@ class Emprunt
     private ?string $date_retour_reelle  = null;
     private string  $statut              = 'en_cours';
 
-    /* Champs joints (JOIN) */
     private ?string $livre_titre         = null;
     private ?string $livre_auteur        = null;
     private ?string $utilisateur_nom     = null;
@@ -28,7 +25,7 @@ class Emprunt
         $this->statut             = 'en_cours';
     }
 
-    /* ── Getters ─────────────────────────────────────────────────── */
+   
     public function getId(): int                   { return $this->id; }
     public function getUtilisateurId(): int        { return $this->utilisateur_id; }
     public function getLivreId(): int              { return $this->livre_id; }
@@ -39,16 +36,10 @@ class Emprunt
     public function getLivreTitre(): ?string       { return $this->livre_titre; }
     public function getLivreAuteur(): ?string      { return $this->livre_auteur; }
     public function getUtilisateurNom(): ?string   { return $this->utilisateur_nom; }
-
-    /* ── Helpers de statut ───────────────────────────────────────── */
     public function isEnCours(): bool  { return $this->statut === 'en_cours'; }
     public function isEnRetard(): bool { return $this->statut === 'en_retard'; }
     public function isRendu(): bool    { return $this->statut === 'rendu'; }
 
-    /**
-     * Jours restants avant l'échéance.
-     * Valeur négative = en retard de N jours.
-     */
     public function getJoursRestants(): int
     {
         if ($this->isRendu()) return 0;
@@ -66,7 +57,7 @@ class Emprunt
         return (new DateTime()) > (new DateTime($this->date_retour_prevue));
     }
 
-    /* ── Setters (pour FETCH_CLASS) ──────────────────────────────── */
+
     public function setLivreTitre(string $titre): void     { $this->livre_titre      = $titre; }
     public function setLivreAuteur(string $auteur): void   { $this->livre_auteur     = $auteur; }
     public function setUtilisateurNom(string $nom): void   { $this->utilisateur_nom  = $nom; }

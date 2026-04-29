@@ -35,10 +35,9 @@ require_once __DIR__ . '/../../controllers/addLivreController.php';
             <?php endif; ?>
 
             <?php if (!empty($error)): ?>
-                <div class="alert error"><?= $error /* peut contenir du HTML (balises <br>) */ ?></div>
+                <div class="alert error"><?= $error  ?></div>
             <?php endif; ?>
 
-            <!-- Le formulaire poste vers lui-même -->
             <form action="add_livre.php" method="POST" enctype="multipart/form-data">
 
                 <div class="form-row">

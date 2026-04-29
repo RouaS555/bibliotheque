@@ -1,15 +1,11 @@
 <?php
-/**
- * deleteLivreController.php – Suppression d'un livre (admin uniquement)
- * Appelé via GET : ?code=LIV001
- */
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 require_once __DIR__ . '/../config/config.php';
 
-// Garde admin
 if (!isset($_SESSION['user_id']) || ($_SESSION['user_role'] ?? '') !== 'admin') {
     header("Location: " . BASE_URL . "views/livres/catalogue.php");
     exit;

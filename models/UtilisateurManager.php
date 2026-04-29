@@ -1,9 +1,7 @@
 <?php
 require_once __DIR__ . '/Utilisateur.php';
 
-/**
- * UtilisateurManager – CRUD sur la table `utilisateurs`
- */
+
 class UtilisateurManager
 {
     private PDO $db;
@@ -13,7 +11,6 @@ class UtilisateurManager
         $this->db = $db;
     }
 
-    /** Trouve un utilisateur par son email */
     public function findByEmail(string $email): ?Utilisateur
     {
         $stmt = $this->db->prepare("SELECT * FROM utilisateurs WHERE email = :email");
@@ -23,7 +20,6 @@ class UtilisateurManager
         return $result ?: null;
     }
 
-    /** Trouve un utilisateur par son ID */
     public function findById(int $id): ?Utilisateur
     {
         $stmt = $this->db->prepare("SELECT * FROM utilisateurs WHERE id = :id");
@@ -33,7 +29,6 @@ class UtilisateurManager
         return $result ?: null;
     }
 
-    /** Crée un nouvel utilisateur */
     public function insert(Utilisateur $user): bool
     {
         $sql  = "INSERT INTO utilisateurs (nom, email, mot_de_passe, role)
@@ -47,10 +42,7 @@ class UtilisateurManager
         ]);
     }
 
-    /**
-     * Vérifie email + mot de passe (bcrypt)
-     * Retourne l'objet Utilisateur si OK, null sinon
-     */
+    
     public function authenticate(string $email, string $password): ?Utilisateur
     {
         $user = $this->findByEmail($email);
@@ -60,7 +52,6 @@ class UtilisateurManager
         return null;
     }
 
-    /** Retourne tous les utilisateurs */
     public function getAllUsers(): array
     {
         $stmt = $this->db->query("SELECT * FROM utilisateurs ORDER BY nom");

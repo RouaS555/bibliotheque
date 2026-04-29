@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/Livre.php';
 
-/**
- * LivreManager – CRUD complet sur la table `livres`
- * Implémente toutes les méthodes requises par l'Activité 5 (PDF)
- */
 class LivreManager
 {
     private PDO $db;
@@ -14,28 +10,23 @@ class LivreManager
         $this->db = $db;
     }
 
-    /* ══════════════════════════════════════════════════════════════
-     *  READ / SEARCH
-     * ══════════════════════════════════════════════════════════════ */
 
-    /** Retourne tous les livres triés par titre */
+
+
     public function getAllLivres(): array
     {
         $stmt = $this->db->query("SELECT * FROM livres ORDER BY titre");
         return $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Livre');
     }
 
-    /** Livres dont le stock > 0 */
+
     public function getLivresDisponibles(): array
     {
         $stmt = $this->db->query("SELECT * FROM livres WHERE stock > 0 ORDER BY titre");
         return $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Livre');
     }
 
-    /**
-     * Recherche par catégorie exacte
-     * (PDF Activité 5 – findByCategory)
-     */
+    
     public function findByCategory(string $cat): array
     {
         $stmt = $this->db->prepare("SELECT * FROM livres WHERE categorie = :cat ORDER BY titre");
@@ -43,10 +34,6 @@ class LivreManager
         return $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Livre');
     }
 
-    /**
-     * Recherche par nom / titre (LIKE)
-     * (PDF Activité 5 – findByName)
-     */
     public function findByName(string $name): array
     {
         $stmt = $this->db->prepare("SELECT * FROM livres WHERE titre LIKE :name ORDER BY titre");
@@ -54,10 +41,7 @@ class LivreManager
         return $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Livre');
     }
 
-    /**
-     * Recherche multicritères – les paramètres vides sont ignorés
-     * (PDF Activité 5 – search)
-     */
+    
     public function search(string $titre = '', string $categorie = '', string $auteur = ''): array
     {
         $sql    = "SELECT * FROM livres WHERE 1=1";
@@ -82,10 +66,7 @@ class LivreManager
         return $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Livre');
     }
 
-    /**
-     * Recherche par code (clé primaire métier)
-     * Utile pour vérifier l'existence avant un ajout (PDF Activité 5 – getProduct)
-     */
+   
     public function getLivreByCode(string $code): ?Livre
     {
         $stmt = $this->db->prepare("SELECT * FROM livres WHERE code = :code");
@@ -95,7 +76,7 @@ class LivreManager
         return $result ?: null;
     }
 
-    /** Recherche par ID auto-incrémenté */
+   
     public function getLivreById(int $id): ?Livre
     {
         $stmt = $this->db->prepare("SELECT * FROM livres WHERE id = :id");
@@ -105,10 +86,7 @@ class LivreManager
         return $result ?: null;
     }
 
-    /**
-     * Liste unique des catégories (pour les menus déroulants)
-     * (PDF Activité 5 – findAllCategories)
-     */
+   
     public function findAllCategories(): array
     {
         $stmt = $this->db->query(
@@ -119,11 +97,7 @@ class LivreManager
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-    /* ══════════════════════════════════════════════════════════════
-     *  CREATE / UPDATE / DELETE
-     * ══════════════════════════════════════════════════════════════ */
 
-    /** Insère un nouveau livre (PDF Activité 5 – insert) */
     public function insert(Livre $livre): bool
     {
         $sql = "INSERT INTO livres
@@ -148,7 +122,6 @@ class LivreManager
         ]);
     }
 
-    /** Met à jour un livre existant (PDF Activité 5 – update) */
     public function update(Livre $livre): bool
     {
         $sql = "UPDATE livres
@@ -178,14 +151,13 @@ class LivreManager
         ]);
     }
 
-    /** Supprime un livre par son code (PDF Activité 5 – delete) */
+  
     public function delete(string $code): bool
     {
         $stmt = $this->db->prepare("DELETE FROM livres WHERE code = :code");
         return $stmt->execute([':code' => $code]);
     }
 
-    /* ── Gestion du stock (emprunts) ─────────────────────────────── */
 
     public function decrementStock(int $livreId): bool
     {

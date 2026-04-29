@@ -1,9 +1,6 @@
 <?php
 require_once __DIR__ . '/Emprunt.php';
 
-/**
- * EmpruntManager – CRUD sur la table `emprunts`
- */
 class EmpruntManager
 {
     private PDO $db;
@@ -13,9 +10,7 @@ class EmpruntManager
         $this->db = $db;
     }
 
-    /* ══════════════════════════════════════════════════════════════
-     *  CREATE
-     * ══════════════════════════════════════════════════════════════ */
+  
 
     /** Crée un nouvel emprunt (retour prévu dans 14 jours) */
     public function createEmprunt(int $utilisateurId, int $livreId): bool
@@ -31,15 +26,6 @@ class EmpruntManager
         ]);
     }
 
-    /* ══════════════════════════════════════════════════════════════
-     *  READ
-     * ══════════════════════════════════════════════════════════════ */
-
-    /**
-     * Historique complet d'un utilisateur (actifs + rendus)
-     * Note : on utilise FETCH_ASSOC puis on hydrate manuellement
-     * pour que les colonnes jointes (livre_titre…) soient bien renseignées.
-     */
     public function getEmpruntsByUser(int $utilisateurId): array
     {
         $sql  = "SELECT e.*,
@@ -114,7 +100,6 @@ class EmpruntManager
         return (int) $stmt->fetchColumn() > 0;
     }
 
-    /** Compte les emprunts actifs d'un utilisateur */
     public function countActiveLoans(int $utilisateurId): int
     {
         $sql  = "SELECT COUNT(*) FROM emprunts
@@ -125,9 +110,6 @@ class EmpruntManager
         return (int) $stmt->fetchColumn();
     }
 
-    /* ══════════════════════════════════════════════════════════════
-     *  HYDRATATION MANUELLE (FETCH_CLASS + colonnes jointes)
-     * ══════════════════════════════════════════════════════════════ */
 
     private function hydrateAll(array $rows): array
     {
@@ -141,7 +123,7 @@ class EmpruntManager
     private function hydrateOne(array $row): Emprunt
     {
         $e = new Emprunt();
-        // Propriétés de la table (accès via Reflection pour les privées)
+    
         foreach ([
             'id', 'utilisateur_id', 'livre_id',
             'date_emprunt', 'date_retour_prevue', 'date_retour_reelle', 'statut',
@@ -152,7 +134,7 @@ class EmpruntManager
                 $ref->setValue($e, $row[$prop]);
             }
         }
-        // Colonnes jointes via setters publics
+      
         if (!empty($row['livre_titre']))      $e->setLivreTitre($row['livre_titre']);
         if (!empty($row['livre_auteur']))     $e->setLivreAuteur($row['livre_auteur']);
         if (!empty($row['utilisateur_nom']))  $e->setUtilisateurNom($row['utilisateur_nom']);

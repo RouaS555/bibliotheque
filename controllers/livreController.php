@@ -1,7 +1,5 @@
 <?php
-/**
- * livreController.php – Récupère les livres pour le catalogue
- */
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -18,7 +16,7 @@ $searchAuteur = '';
 $searchCategorie = '';
 $categories = $manager->findAllCategories();
 
-// Handle search
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'search') {
     $searchTitre = trim($_GET['search'] ?? '');
     $searchAuteur = trim($_GET['auteur'] ?? '');
@@ -28,6 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['act
     $livres = $manager->getAllLivres();
 }
 
-// Also handle success message from add_livre
+
 $successMsg = $_GET['success'] ?? '';
 ?>

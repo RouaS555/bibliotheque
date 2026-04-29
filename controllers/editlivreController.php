@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($prix <= 0)     $errors[] = "Le prix doit être positif.";
     if ($stock < 0)     $errors[] = "Le stock ne peut pas être négatif.";
 
-    // ── Upload image (optionnel à l'édition) ─────────────────────
-    $imageName = $livre->getImage(); // conserver l'image actuelle par défaut
+
+    $imageName = $livre->getImage(); 
     if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
         $uploadDir = dirname(__DIR__) . '/public/uploads/livres/';
         $uploader  = new FileUploader($uploadDir);

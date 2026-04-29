@@ -1,7 +1,5 @@
 <?php
-/**
- * FileUploader – Upload sécurisé d'images de couverture
- */
+
 class FileUploader
 {
     private string $targetDirectory;
@@ -10,11 +8,10 @@ class FileUploader
     private array  $errors = [];
 
     public function __construct(
-        string $targetDirectory    = '',           // chemin absolu fourni par le contrôleur
+        string $targetDirectory    = '',           
         array  $allowedExtensions  = ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-        int    $maxSize            = 2097152        // 2 Mo
+        int    $maxSize            = 2097152        
     ) {
-        // Si aucun chemin fourni, on utilise le dossier public/uploads/livres/ du projet
         if (empty($targetDirectory)) {
             $targetDirectory = dirname(__DIR__) . '/public/uploads/livres/';
         }
@@ -27,7 +24,6 @@ class FileUploader
         }
     }
 
-    /** Upload un fichier ; retourne le nouveau nom ou false */
     public function upload(array $fileData): string|false
     {
         $this->errors = [];

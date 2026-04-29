@@ -1,7 +1,5 @@
 <?php
-/**
- * logoutController.php – Déconnexion
- */
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

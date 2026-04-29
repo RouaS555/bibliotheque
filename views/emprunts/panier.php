@@ -67,7 +67,6 @@ unset($_SESSION['success'], $_SESSION['error']);
             $empruntsPasses = array_filter($emprunts, fn($e) => $e->isRendu());
             ?>
 
-            <!-- ── EMPRUNTS ACTIFS ──────────────────────────────── -->
             <?php if (empty($empruntsActifs)): ?>
                 <div class="alert info">📭 Vous n'avez aucun emprunt en cours.</div>
             <?php else: ?>
@@ -75,19 +74,19 @@ unset($_SESSION['success'], $_SESSION['error']);
                     <?php foreach ($empruntsActifs as $emprunt): ?>
                         <div class="emprunt-card <?= $emprunt->isEnRetard() ? 'overdue' : '' ?>">
                             <div class="emprunt-info">
-                                <h3><?= htmlspecialchars($emprunt->getLivreTitre() ?? '—') ?></h3>
-                                <p><?= htmlspecialchars($emprunt->getLivreAuteur() ?? '—') ?></p>
-                                <p>Emprunté le :
-                                    <?= date('d/m/Y', strtotime($emprunt->getDateEmprunt())) ?>
-                                </p>
-                                <p>À retourner avant le :
-                                    <?= date('d/m/Y', strtotime($emprunt->getDateRetourPrevue())) ?>
-                                </p>
-                                <?php if ($emprunt->isEnRetard()): ?>
-                                    <p class="overdue-label">
-                                        EN RETARD de <?= abs($emprunt->getJoursRestants()) ?> jour(s) !
-                                    </p>
-                                <?php else: ?>
+      <h3><?= htmlspecialchars($emprunt->getLivreTitre() ?? '—') ?></h3>
+  <p><?= htmlspecialchars($emprunt->getLivreAuteur() ?? '—') ?></p>
+  <p>Emprunté le :
+     <?= date('d/m/Y', strtotime($emprunt->getDateEmprunt())) ?>
+  </p>
+  <p>À retourner avant le :
+      <?= date('d/m/Y', strtotime($emprunt->getDateRetourPrevue())) ?>
+   </p>
+  <?php if ($emprunt->isEnRetard()): ?>
+ <p class="overdue-label">
+  EN RETARD de <?= abs($emprunt->getJoursRestants()) ?> jour(s) !
+   </p>
+    <?php else: ?>
                                     <p>Jours restants : <?= $emprunt->getJoursRestants() ?> jour(s)</p>
                                 <?php endif; ?>
                             </div>
@@ -103,18 +102,17 @@ unset($_SESSION['success'], $_SESSION['error']);
                 </div>
             <?php endif; ?>
 
-            <!-- ── HISTORIQUE ──────────────────────────────────── -->
             <?php if (!empty($empruntsPasses)): ?>
                 <h3 style="margin-top:40px;">Historique des emprunts</h3>
                 <table>
                     <thead>
                         <tr>
-                            <th>Titre</th>
-                            <th>Auteur</th>
-                            <th>Date emprunt</th>
-                            <th>Date retour prévue</th>
-                            <th>Date retour réelle</th>
-                            <th>Statut</th>
+    <th>Titre</th>
+   <th>Auteur</th>
+   <th>Date emprunt</th>
+    <th>Date retour prévue</th>
+  <th>Date retour réelle</th>
+  <th>Statut</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,9 +125,9 @@ unset($_SESSION['success'], $_SESSION['error']);
                                 <td>
                                     <?= $emprunt->getDateRetourReelle()
                                         ? date('d/m/Y', strtotime($emprunt->getDateRetourReelle()))
-                                        : '—' ?>
-                                </td>
-                                <td><span class="badge-rentre">Rendu</span></td>
+               : '—' ?>
+      </td>
+  <td><span class="badge-rentre">Rendu</span></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

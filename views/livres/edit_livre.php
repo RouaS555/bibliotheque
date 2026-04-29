@@ -1,10 +1,8 @@
 <?php
-/**
- * views/livres/edit_livre.php – Formulaire de modification de livre (admin)
- */
+
 require_once __DIR__ . '/../../controllers/editlivreController.php';
 
-// Safety net: if $livre is not loaded, stop here — never render the page
+
 if (!isset($livre) || $livre === null) {
     die("Erreur : livre non chargé. <a href='catalogue.php'>Retour au catalogue</a>");
 }
@@ -40,7 +38,7 @@ if (!isset($livre) || $livre === null) {
             <?php endif; ?>
 
             <?php if (!empty($error)): ?>
-                <div class="alert error"><?= $error /* peut contenir du HTML */ ?></div>
+                <div class="alert error"><?= $error  ?></div>
             <?php endif; ?>
 
             <form action="edit_livre.php?code=<?= urlencode($livre->getCode()) ?>"

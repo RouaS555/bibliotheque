@@ -1,7 +1,5 @@
 <?php
-/**
- * views/auth/register.php
- */
+
 require_once __DIR__ . '/../../controllers/authController.php';
 ?>
 <!DOCTYPE html>

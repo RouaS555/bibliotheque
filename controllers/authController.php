@@ -1,15 +1,12 @@
 <?php
-/**
- * authController.php – Connexion & Inscription
- * Inclus depuis views/auth/login.php ou views/auth/register.php
- */
 
-// Évite le double démarrage si la vue a déjà appelé session_start()
+
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Chemins absolus calculés depuis l'emplacement réel du contrôleur
+
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/db_connect.php';
 require_once __DIR__ . '/../models/Utilisateur.php';
@@ -21,9 +18,6 @@ $success = '';
 
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
 
-/* ══════════════════════════════════════════════════════════════════
- *  CONNEXION
- * ══════════════════════════════════════════════════════════════════ */
 if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $email    = trim($_POST['email']    ?? '');
@@ -40,7 +34,7 @@ if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_email'] = $user->getEmail();
             $_SESSION['user_role']  = $user->getRole();
 
-            // Redirige vers le catalogue (chemin relatif depuis la racine web)
+
             header("Location: " . BASE_URL . "views/livres/catalogue.php");
             exit;
         } else {
@@ -49,9 +43,7 @@ if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-/* ══════════════════════════════════════════════════════════════════
- *  INSCRIPTION
- * ══════════════════════════════════════════════════════════════════ */
+
 if ($action === 'register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $nom              = trim($_POST['nom']              ?? '');
