@@ -1,12 +1,9 @@
 <?php
-/**
- * Configuration de la base de données
- * Base : bd_bibliotheque | XAMPP / phpMyAdmin
- */
+
 
 $dsn  = 'mysql:host=localhost;dbname=bd_bibliotheque;charset=utf8mb4';
 $user = 'root';
-$psw  = '';          // mot de passe vide par défaut sous XAMPP
+$psw  = '';          
 
 try {
     $db = new PDO($dsn, $user, $psw);

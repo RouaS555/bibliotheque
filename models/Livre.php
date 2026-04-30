@@ -72,7 +72,7 @@ class Livre
         return '../../public/uploads/livres/' . $this->image;
     }
 
-    /* ── Setters ─────────────────────────────────────────────────── */
+
     public function setCode(string $code): void        { $this->code  = $code; }
     public function setTitre(string $titre): void      { $this->titre = $titre; }
     public function setAuteur(string $auteur): void    { $this->auteur = $auteur; }

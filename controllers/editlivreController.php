@@ -24,7 +24,6 @@ $manager = new LivreManager($db);
 $message = '';
 $error   = '';
 
-// ── Chargement du livre à éditer ──────────────────────────────────
 $code = trim($_GET['code'] ?? $_POST['code'] ?? '');
 
 if (empty($code)) {
@@ -40,7 +39,7 @@ if (!$livre) {
     exit;
 }
 
-// ── Traitement du formulaire POST ─────────────────────────────────
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $titre       = trim($_POST['titre']       ?? '');

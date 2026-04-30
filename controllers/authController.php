@@ -69,8 +69,6 @@ if ($action === 'register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $error = "Erreur lors de l'inscription. Réessayez.";
         }
-    } else {
-        $error = implode("<br>", $errors);
-    }
+    } 
 }
 ?>
